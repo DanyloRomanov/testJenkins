@@ -1,26 +1,21 @@
 pipeline{
-    agent any
+     agent {
+        docker {
+            image 'node:10'
+            args '-p 8081:8081'
+        }
+    }
     stages{
-        stage('One'){
+        stage('Npm install'){
             steps{
-                echo 'Hi, this is first step'
+                sh 'npm install'
             }
         }
-        stage('Two'){
+        stage('Start Docker test'){
             steps {
-                input ('Do you want to proceed')
+                 sh 'docker-compose up -d'
             }
         }
-        stage('Three'){
-            when {
-                not{
-                    branch "master"
-                }
-            }
-            steps{
-                echo "hello"
-            }
-        }
-            
+                   
     }
 }
