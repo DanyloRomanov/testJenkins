@@ -2,7 +2,6 @@ pipeline{
      agent {
         docker {
             image 'node:10'
-            args '-p 8081:8081'
         }
     }
     stages{
